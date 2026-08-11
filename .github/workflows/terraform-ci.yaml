@@ -1,0 +1,23 @@
+name: CI pipeline
+on:
+  pull_request:
+    paths:
+      - "**.tf"
+
+jobs:
+  ci:
+    name: terraform ci
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v6
+
+      - name: Check Terraform file are formatted correctly
+        uses: dflook/terraform-fmt-check@v2
+        with:
+          path: ./snowflake/production
+
+      - name: terraform validate
+        uses: dflook/terraform-validate@v2
+        with:
+          path: ./snowflake/production
