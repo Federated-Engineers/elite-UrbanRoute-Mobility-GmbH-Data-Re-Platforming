@@ -151,6 +151,6 @@ resource "snowflake_grant_privileges_to_account_role" "dbt_prod_future_view" {
       object_type_plural = "VIEWS"
       in_schema          = snowflake_schema.prod.fully_qualified_name
     }
-  } 
+  }
 }
 
