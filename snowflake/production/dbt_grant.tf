@@ -153,4 +153,3 @@ resource "snowflake_grant_privileges_to_account_role" "dbt_prod_future_view" {
     }
   }
 }
-
