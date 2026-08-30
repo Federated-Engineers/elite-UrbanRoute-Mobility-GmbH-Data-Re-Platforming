@@ -18,6 +18,10 @@ resource "snowflake_account_role" "airflow_role" {
   name = "AIRFLOW_ROLE"
 }
 
+resource "snowflake_account_role" "dbt_role" {
+  name = "DBT_ROLE"
+}
+
 resource "snowflake_account_role" "data_role" {
   name = "DATA_ROLE"
 }

@@ -23,7 +23,17 @@ resource "snowflake_grant_account_role" "airflow_user_role" {
   user_name = module.airflow_user.name
 }
 
+resource "snowflake_grant_account_role" "dbt_user_role" {
+  role_name = snowflake_account_role.dbt_role.name
+  user_name = module._user.name
+}
+
 resource "snowflake_grant_account_role" "data_user_role" {
   role_name = snowflake_account_role.data_role.name
+  user_name = module.platform_admin_user.name
+}
+
+resource "snowflake_grant_account_role" "service_user_role" {
+  role_name = snowflake_account_role.service_role.name
   user_name = module.platform_admin_user.name
 }

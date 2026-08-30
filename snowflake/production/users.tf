@@ -92,3 +92,22 @@ module "airflow_user" {
   must_change_password = var.must_change_password
   disable_mfa          = var.disable_mfa
 }
+
+module "dbt_user" {
+  source = "../modules/user"
+
+  name         = "DBT_USER"
+  login_name   = "DBT_USER"
+  first_name   = "dbt"
+  last_name    = "cloud"
+  password     = data.aws_ssm_parameter.snowflake_password.value
+  comment      = "dbt cloud service account"
+  display_name = "dbt User"
+  disabled     = var.disabled
+
+  default_warehouse = module.dbt_wh.name
+  default_role      = snowflake_account_role.dbt_role.name
+
+  must_change_password = var.must_change_password
+  disable_mfa          = var.disable_mfa
+}
