@@ -22,7 +22,7 @@ variable "last_name" {
 
 variable "comment" {
   type        = string
-  description = "Comment describing the purpose of the user account."
+  description = "To describe the purpose of the user account."
   default     = null
 }
 

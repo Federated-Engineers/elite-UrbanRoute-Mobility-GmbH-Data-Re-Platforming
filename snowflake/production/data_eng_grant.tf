@@ -1,8 +1,6 @@
 resource "snowflake_grant_privileges_to_account_role" "engineer_wh" {
   privileges = [
-    "USAGE",
-    "MONITOR",
-    "MODIFY"
+    "USAGE"
   ]
   account_role_name = snowflake_account_role.data_engineer.name
   on_account_object {
@@ -12,7 +10,7 @@ resource "snowflake_grant_privileges_to_account_role" "engineer_wh" {
 }
 
 resource "snowflake_grant_privileges_to_account_role" "data_engineer_db_usage" {
-  privileges        = ["USAGE", "MONITOR", "MODIFY", "CREATE SCHEMA"]
+  privileges        = ["USAGE", "CREATE SCHEMA"]
   account_role_name = snowflake_account_role.data_engineer.name
   on_account_object {
     object_type = "DATABASE"
@@ -29,22 +27,20 @@ resource "snowflake_grant_privileges_to_account_role" "data_engineer_db_usage_te
   }
 }
 
-resource "snowflake_grant_privileges_to_account_role" "data_engineer_raw" {
+resource "snowflake_grant_privileges_to_account_role" "data_engineer_bronze" {
   privileges        = ["USAGE"]
   account_role_name = snowflake_account_role.data_engineer.name
   on_schema {
-    schema_name = snowflake_schema.raw.fully_qualified_name
+    schema_name = snowflake_schema.bronze.fully_qualified_name
   }
 }
 
 resource "snowflake_grant_privileges_to_account_role" "data_engineer_silver" {
+  privileges        = ["USAGE", "CREATE TABLE", "CREATE VIEW"]
   account_role_name = snowflake_account_role.data_engineer.name
   on_schema {
     schema_name = snowflake_schema.silver.fully_qualified_name
   }
-  all_privileges    = true
-  with_grant_option = true
-
 }
 
 resource "snowflake_grant_privileges_to_account_role" "data_engineer_dev" {
@@ -57,28 +53,27 @@ resource "snowflake_grant_privileges_to_account_role" "data_engineer_dev" {
 
 }
 
-resource "snowflake_grant_privileges_to_account_role" "data_engineer_prod" {
+resource "snowflake_grant_privileges_to_account_role" "data_engineer_gold" {
+  privileges        = ["USAGE", "CREATE TABLE", "CREATE VIEW"]
   account_role_name = snowflake_account_role.data_engineer.name
   on_schema {
-    schema_name = snowflake_schema.prod.fully_qualified_name
+    schema_name = snowflake_schema.gold.fully_qualified_name
   }
-  all_privileges    = true
-  with_grant_option = true
 }
 
-resource "snowflake_grant_privileges_to_account_role" "data_engineer_raw_table" {
+resource "snowflake_grant_privileges_to_account_role" "data_engineer_bronze_table" {
   privileges        = ["SELECT"]
   account_role_name = snowflake_account_role.data_engineer.name
   on_schema_object {
     all {
       object_type_plural = "TABLES"
-      in_schema          = snowflake_schema.raw.fully_qualified_name
+      in_schema          = snowflake_schema.bronze.fully_qualified_name
     }
   }
 }
 
 resource "snowflake_grant_privileges_to_account_role" "data_engineer_silver_table" {
-  privileges        = ["SELECT", "INSERT"]
+  privileges        = ["SELECT"]
   account_role_name = snowflake_account_role.data_engineer.name
   on_schema_object {
     all {
@@ -99,13 +94,13 @@ resource "snowflake_grant_privileges_to_account_role" "data_engineer_dev_table" 
   }
 }
 
-resource "snowflake_grant_privileges_to_account_role" "data_engineer_prod_table" {
-  privileges        = ["SELECT", "INSERT"]
+resource "snowflake_grant_privileges_to_account_role" "data_engineer_gold_table" {
+  privileges        = ["SELECT"]
   account_role_name = snowflake_account_role.data_engineer.name
   on_schema_object {
     all {
       object_type_plural = "TABLES"
-      in_schema          = snowflake_schema.prod.fully_qualified_name
+      in_schema          = snowflake_schema.gold.fully_qualified_name
     }
   }
 }
@@ -132,13 +127,13 @@ resource "snowflake_grant_privileges_to_account_role" "data_engineer_dev_view" {
   }
 }
 
-resource "snowflake_grant_privileges_to_account_role" "data_engineer_prod_view" {
+resource "snowflake_grant_privileges_to_account_role" "data_engineer_gold_view" {
   privileges        = ["SELECT"]
   account_role_name = snowflake_account_role.data_engineer.name
   on_schema_object {
     all {
       object_type_plural = "VIEWS"
-      in_schema          = snowflake_schema.prod.fully_qualified_name
+      in_schema          = snowflake_schema.gold.fully_qualified_name
     }
   }
 }

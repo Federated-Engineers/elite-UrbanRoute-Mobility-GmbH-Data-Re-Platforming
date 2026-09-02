@@ -1,5 +1,5 @@
 resource "snowflake_grant_privileges_to_account_role" "analytics_wh" {
-  privileges        = ["USAGE", "MONITOR"]
+  privileges        = ["USAGE"]
   account_role_name = snowflake_account_role.analytics_engineer.name
   on_account_object {
     object_type = "WAREHOUSE"
@@ -25,21 +25,20 @@ resource "snowflake_grant_privileges_to_account_role" "analytics_db_test_usage" 
   }
 }
 
-resource "snowflake_grant_privileges_to_account_role" "analytics_engineer_raw" {
+resource "snowflake_grant_privileges_to_account_role" "analytics_engineer_bronze" {
   privileges        = ["USAGE"]
   account_role_name = snowflake_account_role.analytics_engineer.name
   on_schema {
-    schema_name = snowflake_schema.raw.fully_qualified_name
+    schema_name = snowflake_schema.bronze.fully_qualified_name
   }
 }
 
 resource "snowflake_grant_privileges_to_account_role" "analytics_engineer_silver" {
+  privileges        = ["USAGE"]
   account_role_name = snowflake_account_role.analytics_engineer.name
   on_schema {
     schema_name = snowflake_schema.silver.fully_qualified_name
   }
-  all_privileges = true
-
 }
 
 resource "snowflake_grant_privileges_to_account_role" "analytics_engineer_dev" {
@@ -51,19 +50,19 @@ resource "snowflake_grant_privileges_to_account_role" "analytics_engineer_dev" {
 
 }
 
-resource "snowflake_grant_privileges_to_account_role" "raw_table" {
+resource "snowflake_grant_privileges_to_account_role" "bronze_table" {
   privileges        = ["SELECT"]
   account_role_name = snowflake_account_role.analytics_engineer.name
   on_schema_object {
     all {
       object_type_plural = "TABLES"
-      in_schema          = snowflake_schema.raw.fully_qualified_name
+      in_schema          = snowflake_schema.bronze.fully_qualified_name
     }
   }
 }
 
 resource "snowflake_grant_privileges_to_account_role" "silver_table" {
-  privileges        = ["SELECT", "INSERT", "UPDATE", "TRUNCATE"]
+  privileges        = ["SELECT"]
   account_role_name = snowflake_account_role.analytics_engineer.name
   on_schema_object {
     all {
@@ -84,20 +83,20 @@ resource "snowflake_grant_privileges_to_account_role" "dev_table" {
   }
 }
 
-resource "snowflake_grant_privileges_to_account_role" "raw_tables_future_table" {
+resource "snowflake_grant_privileges_to_account_role" "bronze_tables_future_table" {
   privileges        = ["SELECT"]
   account_role_name = snowflake_account_role.analytics_engineer.name
   on_schema_object {
     future {
       object_type_plural = "TABLES"
-      in_schema          = snowflake_schema.raw.fully_qualified_name
+      in_schema          = snowflake_schema.bronze.fully_qualified_name
     }
   }
 }
 
 
 resource "snowflake_grant_privileges_to_account_role" "silver_tables_future_table" {
-  privileges        = ["SELECT", "INSERT", "UPDATE", "TRUNCATE"]
+  privileges        = ["SELECT"]
   account_role_name = snowflake_account_role.analytics_engineer.name
   on_schema_object {
     future {

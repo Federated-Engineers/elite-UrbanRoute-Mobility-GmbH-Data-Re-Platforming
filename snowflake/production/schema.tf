@@ -1,6 +1,6 @@
-resource "snowflake_schema" "raw" {
+resource "snowflake_schema" "bronze" {
   database = snowflake_database.urban_route_db.name
-  name     = "RAW"
+  name     = "Bronze"
 }
 
 resource "snowflake_schema" "silver" {
@@ -8,9 +8,9 @@ resource "snowflake_schema" "silver" {
   name     = "SILVER"
 }
 
-resource "snowflake_schema" "prod" {
+resource "snowflake_schema" "gold" {
   database = snowflake_database.urban_route_db.name
-  name     = "PROD"
+  name     = "GOLD"
 }
 
 resource "snowflake_schema" "dev" {
