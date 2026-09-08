@@ -21,7 +21,7 @@ provider "snowflake" {
   account_name      = "IH64623"
   user              = "MUSILIADE"
   password          = "Musili_1234567"
-  role              = "ACCOUNTADMIN" 
+  role              = "ACCOUNTADMIN"
 
   preview_features_enabled = [
     "snowflake_storage_integration_aws_resource",
