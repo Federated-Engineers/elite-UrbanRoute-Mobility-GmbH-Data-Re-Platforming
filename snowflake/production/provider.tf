@@ -17,6 +17,12 @@ terraform {
 
 provider "snowflake" {
 
+  organization_name = "LZWZHVW"
+  account_name      = "IH64623"
+  user              = "MUSILIADE"
+  password          = "Musili_1234567"
+  role              = "ACCOUNTADMIN" 
+
   preview_features_enabled = [
     "snowflake_storage_integration_aws_resource",
     "snowflake_stage_external_s3_resource",
