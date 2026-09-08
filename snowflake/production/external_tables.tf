@@ -1,7 +1,7 @@
 resource "snowflake_external_table" "trips_ext" {
   database     = snowflake_database.urban_route_db.name
   schema       = snowflake_schema.bronze.name
-  name         = "TRIPS"
+  name         = "TRIPS_TEST"
   comment      = "External table of trip JSON files stored in S3."
   location     = "@${snowflake_stage_external_s3.urban_route_stage.fully_qualified_name}"
   file_format  = "FORMAT_NAME = ${snowflake_file_format.json_data.fully_qualified_name}"
@@ -62,6 +62,8 @@ resource "snowflake_external_table" "trips_ext" {
   }
 
 }
+
+
 
 
 
