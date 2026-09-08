@@ -16,6 +16,7 @@ terraform {
 }
 
 provider "snowflake" {
+
   organization_name = "LZWZHVW"
   account_name      = "IH64623"
   user              = "MUSILIADE"

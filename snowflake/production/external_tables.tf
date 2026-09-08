@@ -3,8 +3,8 @@ resource "snowflake_external_table" "trips_ext" {
   schema       = snowflake_schema.bronze.name
   name         = "TRIPS"
   comment      = "External table of trip JSON files stored in S3."
-  location     = "@${snowflake_stage_external_s3.urban_route_stage.name}/telemetry/trips"
-  file_format  = "FORMAT_NAME = ${snowflake_database.urban_route_db.name}.${snowflake_schema.bronze.name}.${snowflake_file_format.json_data.name}"
+  location     = "@${snowflake_stage_external_s3.urban_route_stage.fully_qualified_name}"
+  file_format  = "FORMAT_NAME = ${snowflake_file_format.json_data.fully_qualified_name}"
   auto_refresh = true
 
   column {
@@ -62,4 +62,6 @@ resource "snowflake_external_table" "trips_ext" {
   }
 
 }
+
+
 
