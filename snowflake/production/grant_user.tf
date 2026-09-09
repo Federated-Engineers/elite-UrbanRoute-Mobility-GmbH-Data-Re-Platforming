@@ -27,3 +27,4 @@
 #   role_name = snowflake_account_role.data_role.name
 #   user_name = module.platform_admin_user.name
 # }
+

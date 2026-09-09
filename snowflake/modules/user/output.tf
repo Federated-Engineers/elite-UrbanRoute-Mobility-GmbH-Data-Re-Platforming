@@ -9,3 +9,4 @@
 # output "default_warehouse" {
 #   value = snowflake_user.user.default_warehouse
 # }
+

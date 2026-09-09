@@ -15,3 +15,4 @@
 #   storage_integration = snowflake_storage_integration_aws.urban_route_s3_integration.name
 #   comment             = "External stage for JSON files"
 # }
+

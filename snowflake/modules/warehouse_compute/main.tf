@@ -6,3 +6,4 @@
 #   initially_suspended = var.snowflake_warehouse_initially_suspended
 #   comment             = var.snowflake_warehouse_comment
 # }
+

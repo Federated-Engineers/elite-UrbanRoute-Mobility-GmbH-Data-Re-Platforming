@@ -29,3 +29,4 @@
 # resource "snowflake_account_role" "service_role" {
 #   name = "SERVICE_ROLE"
 # }
+

@@ -32,3 +32,4 @@
 #   description = "Comment describing the purpose of the warehouse."
 #   default     = "Warehouse for dbt workloads"
 # }
+
