@@ -30,3 +30,5 @@ provider "snowflake" {
     "snowflake_table_resource"
   ]
 }
+
+
